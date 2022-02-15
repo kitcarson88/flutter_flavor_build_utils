@@ -48,9 +48,9 @@ class DeviceInfoDialog extends StatelessWidget {
             children: <Widget>[
               _buildTile('Flavor:', flavorName),
               _buildTile('Build mode:', FlavorBuildUtils.currentBuildMode().name),
-              _buildTile('Platform:', deviceInfos.platform),
-              _buildTile('User Agent:', deviceInfos.userAgent),
-              _buildTile('Browser Vendor:', deviceInfos.vendor),
+              _buildTile('Platform:', deviceInfos.platform ?? ''),
+              _buildTile('User Agent:', deviceInfos.userAgent ?? ''),
+              _buildTile('Browser Vendor:', deviceInfos.vendor ?? ''),
             ],
           ),
         );

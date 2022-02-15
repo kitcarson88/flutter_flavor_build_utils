@@ -1,8 +1,8 @@
 library flavor_build_utils;
 
-import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
+// import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+// import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class BannerConfig {
   final String? bannerName;
@@ -39,11 +39,11 @@ class FlavorBanner extends StatelessWidget {
   Widget _buildBanner(BuildContext context) => GestureDetector(
         behavior: HitTestBehavior.translucent,
         onLongPress: () {
-          showPlatformDialog(
-              context: context,
-              builder: (BuildContext context) => DeviceInfoDialog(
-                    flavorName: bannerConfig.bannerName ?? 'N/A',
-                  ));
+          // showPlatformDialog(
+          //     context: context,
+          //     builder: (BuildContext context) => DeviceInfoDialog(
+          //           flavorName: bannerConfig.bannerName ?? 'N/A',
+          //         ));
         },
         child: Container(
           width: width,
