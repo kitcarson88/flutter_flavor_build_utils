@@ -1,14 +1,15 @@
 library flavor_build_utils;
 
-// import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
+import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class BannerConfig {
-  final String? bannerName;
-  final Color? bannerColor;
+  final String bannerName;
+  final Color bannerColor;
   final bool isVisible;
-  const BannerConfig({this.bannerName, this.bannerColor, this.isVisible = false});
+  const BannerConfig({required this.bannerName, required this.bannerColor, this.isVisible = false});
 }
 
 class FlavorBanner extends StatelessWidget {
@@ -18,45 +19,50 @@ class FlavorBanner extends StatelessWidget {
   final Color? color;
 
   const FlavorBanner({
-    Key? key,
+    super.key,
     required this.child,
-    BannerConfig? bannerConfig,
+    required this.bannerConfig,
     this.width,
     this.height,
     this.color,
-  })  : bannerConfig = bannerConfig ?? const BannerConfig(),
-        super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     if (!bannerConfig.isVisible) return child;
 
-    return Stack(
-      children: <Widget>[child, _buildBanner(context)],
+    return Navigator(
+      initialRoute: Navigator.defaultRouteName,
+      onGenerateRoute: (routeSettings) => MaterialPageRoute(
+        builder: (context) => Stack(
+          children: <Widget>[
+            child,
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onLongPress: () {
+                showPlatformDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        DeviceInfoDialog(flavorName: bannerConfig.bannerName));
+              },
+              child: Container(
+                width: width,
+                height: height,
+                color: color,
+                child: CustomPaint(
+                  painter: BannerPainter(
+                    message: bannerConfig.bannerName,
+                    textDirection: Directionality.of(context),
+                    layoutDirection: Directionality.of(context),
+                    location: BannerLocation.topStart,
+                    color: bannerConfig.bannerColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
-  Widget _buildBanner(BuildContext context) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onLongPress: () {
-          // showPlatformDialog(
-          //     context: context,
-          //     builder: (BuildContext context) => DeviceInfoDialog(
-          //           flavorName: bannerConfig.bannerName ?? 'N/A',
-          //         ));
-        },
-        child: Container(
-          width: width,
-          height: height,
-          color: color,
-          child: CustomPaint(
-            painter: BannerPainter(
-                message: bannerConfig.bannerName!,
-                textDirection: Directionality.of(context),
-                layoutDirection: Directionality.of(context),
-                location: BannerLocation.topStart,
-                color: bannerConfig.bannerColor!),
-          ),
-        ),
-      );
 }
