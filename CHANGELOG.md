@@ -33,3 +33,7 @@
 ## 2.0.3
 
 * Minor fix on dialog opening
+
+## 2.0.4
+
+* Updated dependencies
