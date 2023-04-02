@@ -1,6 +1,6 @@
 name: flavor_build_utils
 description: A new Flutter package project.
-version: 2.0.4
+version: 2.0.5
 homepage:
 
 environment:
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_platform_widgets: 2.0.0
-  device_info_plus: 4.0.2
+  flutter_platform_widgets: ^3.2.0
+  device_info_plus: ^8.1.0
 
 dev_dependencies:
   flutter_test:

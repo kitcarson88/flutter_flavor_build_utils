@@ -34,21 +34,19 @@ class AndroidInfosContent extends StatelessWidget {
                 ),
                 BuildTile(
                   chiave: 'Manufacturer:',
-                  valore: deviceInfos.manufacturer ?? '',
+                  valore: deviceInfos.manufacturer,
                 ),
                 BuildTile(
                   chiave: 'Model:',
-                  valore: deviceInfos.model ?? '',
+                  valore: deviceInfos.model,
                 ),
                 BuildTile(
                   chiave: 'Android version:',
-                  valore: deviceInfos.version.release ?? '',
+                  valore: deviceInfos.version.release,
                 ),
                 BuildTile(
                   chiave: 'Android SDK:',
-                  valore: deviceInfos.version.sdkInt != null
-                      ? deviceInfos.version.sdkInt.toString()
-                      : '',
+                  valore: deviceInfos.version.sdkInt.toString(),
                 ),
               ],
             ),

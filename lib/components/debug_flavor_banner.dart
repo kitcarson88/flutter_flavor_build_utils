@@ -2,7 +2,6 @@ library flavor_build_utils;
 
 import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class BannerConfig {
