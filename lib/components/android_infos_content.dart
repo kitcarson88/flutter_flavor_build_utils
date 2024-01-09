@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 
 class AndroidInfosContent extends StatelessWidget {
   final String flavorName;
+  final bool isGMS, isHMS;
 
   const AndroidInfosContent({
     super.key,
     required this.flavorName,
+    required this.isGMS,
+    required this.isHMS,
   });
 
   @override
@@ -47,6 +50,14 @@ class AndroidInfosContent extends StatelessWidget {
                 BuildTile(
                   chiave: 'Android SDK:',
                   valore: deviceInfos.version.sdkInt.toString(),
+                ),
+                BuildTile(
+                  chiave: 'Google Message Services:',
+                  valore: isGMS.toString(),
+                ),
+                BuildTile(
+                  chiave: 'Huawei Mobile Services',
+                  valore: isHMS.toString(),
                 ),
               ],
             ),

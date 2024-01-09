@@ -11,8 +11,14 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class DeviceInfoDialog extends StatelessWidget {
   final String flavorName;
+  final bool isGMS, isHMS;
 
-  const DeviceInfoDialog({Key? key, required this.flavorName}) : super(key: key);
+  const DeviceInfoDialog({
+    Key? key,
+    required this.flavorName,
+    this.isGMS = false,
+    this.isHMS = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,11 @@ class DeviceInfoDialog extends StatelessWidget {
     if (kIsWeb) {
       body = WebInfosContent(flavorName: flavorName);
     } else if (Platform.isAndroid) {
-      body = AndroidInfosContent(flavorName: flavorName);
+      body = AndroidInfosContent(
+        flavorName: flavorName,
+        isGMS: isGMS,
+        isHMS: isHMS,
+      );
     } else if (Platform.isIOS) {
       body = IosInfosContent(flavorName: flavorName);
     } else {

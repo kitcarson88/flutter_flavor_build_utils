@@ -37,3 +37,7 @@
 ## 2.0.4
 
 * Updated dependencies
+
+## 2.1.0
+
+* Added gms or hms infos

@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 library flavor_build_utils;
+
+import 'dart:async';
 
 import 'package:flavor_build_utils/components/debug_system_infos_dialog.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +14,31 @@ class BannerConfig {
   const BannerConfig({required this.bannerName, required this.bannerColor, this.isVisible = false});
 }
 
+class ExtraConfig {
+  final FutureOr<bool> isGMS;
+  final FutureOr<bool> isHMS;
+
+  const ExtraConfig({
+    required this.isGMS,
+    required this.isHMS,
+  });
+}
+
 class FlavorBanner extends StatelessWidget {
   final Widget child;
   final BannerConfig bannerConfig;
   final double? width, height;
   final Color? color;
+  final ExtraConfig extraConfig;
 
   const FlavorBanner({
     super.key,
     required this.child,
     required this.bannerConfig,
+    this.extraConfig = const ExtraConfig(
+      isGMS: false,
+      isHMS: false,
+    ),
     this.width,
     this.height,
     this.color,
@@ -38,11 +56,19 @@ class FlavorBanner extends StatelessWidget {
             child,
             GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onLongPress: () {
-                showPlatformDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        DeviceInfoDialog(flavorName: bannerConfig.bannerName));
+              onLongPress: () async {
+                final isGMS = await extraConfig.isGMS;
+                final isHMS = await extraConfig.isHMS;
+
+                if (context.mounted) {
+                  showPlatformDialog(
+                      context: context,
+                      builder: (BuildContext context) => DeviceInfoDialog(
+                            flavorName: bannerConfig.bannerName,
+                            isGMS: isGMS,
+                            isHMS: isHMS,
+                          ));
+                }
               },
               child: Container(
                 width: width,
